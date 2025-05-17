@@ -2,6 +2,8 @@
 
 Este es un resumen de todas las pruebas realizadas con Postman para probar el funcionamiento del backend. Además, se elaborarán tests posteriormente que también lo comprueben.
 
+Además de las pruebas con postman, he elaborado un documento con tests que comprueban estos cuatro casos.Para ejecutarlo, debe accederse a la carpeta tiendaOnline y ejecutar el archivo test.py al tiempo que el back está ejecutándose.
+
 ---
 
 ## Configuración básica
