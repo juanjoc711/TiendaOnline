@@ -12,7 +12,7 @@ def graphql_api():
     
     if result.errors:
         return jsonify({"errors": [str(e) for e in result.errors]}), 400
-    return jsonify(result.data)
+    return jsonify({"data": result.data})
 
 if __name__ == "__main__":
     app.run(debug=True)

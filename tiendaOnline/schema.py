@@ -20,21 +20,23 @@ class ActualizarStock(graphene.Mutation):
         cantidad = graphene.Int(required=True)
 
     producto = graphene.Field(lambda: Producto)
+    mensaje = graphene.String()
 
     def mutate(root, info, id, cantidad):
+        producto = next((p for p in productos if p["id"] == id), None)
+        if not producto:
+            raise Exception("Producto no encontrado")
 
-        for p in productos:
+        producto["stock"] += cantidad
+        if producto["stock"] <= 0:
+            producto["stock"] = 0
+            producto["disponible"] = False
+            mensaje = "¡Aviso! El producto se ha quedado sin stock."
+        else:
+            producto["disponible"] = True
+            mensaje = "Stock actualizado correctamente."
 
-            if p["id"] == id:
-                p["stock"] += cantidad
-                if p["stock"] <= 0:
-                    p["stock"] = 0
-                    p["disponible"] = False
-                else:
-                    p["disponible"] = True
-                return ActualizarStock(producto=p)
-            
-        raise Exception("Producto no encontrado")
+        return ActualizarStock(producto=producto, mensaje=mensaje)
 
 class Mutation(graphene.ObjectType):
     actualizar_stock = ActualizarStock.Field()
