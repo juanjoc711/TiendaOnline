@@ -1,0 +1,18 @@
+# imagen python
+FROM python:3.11-slim
+
+# directorio de trabajo
+WORKDIR /app
+
+# instalar requerimentos
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# copiar lo demas archivos
+COPY . .
+
+# puerto para ejecución de flask
+EXPOSE 5000
+
+# comando de ejecucion
+CMD ["python", "app.py"]
