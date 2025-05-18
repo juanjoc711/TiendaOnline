@@ -14,5 +14,5 @@ COPY . .
 # puerto para ejecución de flask
 EXPOSE 5000
 
-# comando de ejecucion
-CMD ["python", "app.py"]
+# comando de ejecucion:primero arranca el back, luego espera 3 segundos, luego ejecuta los test y finallmente queda esperando
+CMD ["sh", "-c", "python app.py & sleep 3 && python test.py && wait"]
